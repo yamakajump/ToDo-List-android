@@ -21,7 +21,8 @@
         android:id="@+id/durationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Duration"/>
+        android:hint="Duration"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/dateEditText"
@@ -40,12 +41,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:id="@+id/addTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Task"
         android:layout_gravity="center"/>
 </LinearLayout>

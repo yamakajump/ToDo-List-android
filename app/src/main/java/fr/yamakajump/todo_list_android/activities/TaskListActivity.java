@@ -32,8 +32,8 @@ public class TaskListActivity extends AppCompatActivity {
         taskList = new ArrayList<>();
 
         // Temporarily add some sample tasks
-        taskList.add(new Task("Task 1", "Description 1", 30, "2022-02-15", "Home"));
-        taskList.add(new Task("Task 2", "Description 2", 60, "2022-02-16", "Office"));
+        taskList.add(new Task("Task 1", "Description 1", 30, "30 mai 2024", "Home"));
+        taskList.add(new Task("Task 2", "Description 2", 60, "30 mai 2024", "Office"));
 
         taskAdapter = new TaskAdapter(taskList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

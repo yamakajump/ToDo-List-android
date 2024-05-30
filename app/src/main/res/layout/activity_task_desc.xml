@@ -5,35 +5,43 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="Title"/>
+        android:hint="Title"/>
 
-    <TextView
-        android:id="@+id/descriptionTextView"
+    <EditText
+        android:id="@+id/descriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"/>
+
+    <EditText
+        android:id="@+id/durationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/dateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"/>
+
+    <EditText
+        android:id="@+id/contextEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Context"/>
+
+    <Button
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"/>
-
-    <TextView
-        android:id="@+id/durationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Duration"/>
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"/>
-
-    <TextView
-        android:id="@+id/contextTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Context"/>
+        android:text="Save"
+        android:layout_gravity="center"/>
 </LinearLayout>
