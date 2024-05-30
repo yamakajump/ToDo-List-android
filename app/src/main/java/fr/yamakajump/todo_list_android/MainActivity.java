@@ -2,23 +2,20 @@ package fr.yamakajump.todo_list_android;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.content.Intent;
+import fr.yamakajump.todo_list_android.activities.TaskListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Démarrer TaskListActivity au démarrage de l'application
+        Intent intent = new Intent(this, TaskListActivity.class);
+        startActivity(intent);
+        finish(); // Pour éviter que l'utilisateur revienne à cette activité en appuyant sur le bouton retour
     }
 }
