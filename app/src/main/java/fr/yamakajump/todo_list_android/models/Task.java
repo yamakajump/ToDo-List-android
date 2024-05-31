@@ -1,8 +1,15 @@
 package fr.yamakajump.todo_list_android.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity(tableName = "tasks")
 public class Task implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String title;
     private String description;
     private int duration;
@@ -17,18 +24,33 @@ public class Task implements Serializable {
         this.context = context;
     }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    // Getters and setters
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public int getId() {
+        return id;
+    }
 
-    public int getDuration() { return duration; }
-    public void setDuration(int duration) { this.duration = duration; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getContext() { return context; }
-    public void setContext(String context) { this.context = context; }
+    public String getDescription() {
+        return description;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getContext() {
+        return context;
+    }
 }
