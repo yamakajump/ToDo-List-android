@@ -9,37 +9,38 @@
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title"/>
+        android:hint="@string/title"/>
 
     <EditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"/>
+        android:hint="@string/description"/>
 
     <EditText
         android:id="@+id/durationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Duration"
+        android:hint="@string/duration"
         android:inputType="number"/>
 
     <EditText
         android:id="@+id/dateEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date"/>
+        android:hint="@string/date"/>
 
     <EditText
         android:id="@+id/contextEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Context"/>
+        android:hint="@string/context"/>
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:layout_gravity="center"/>
+
 </LinearLayout>

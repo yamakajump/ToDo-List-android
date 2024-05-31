@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ToDo-List-android</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="duration">Duration</string>
+    <string name="date">Date</string>
+    <string name="context">Context</string>
+    <string name="save">Save</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="add_task">Add Task</string>
 </resources>

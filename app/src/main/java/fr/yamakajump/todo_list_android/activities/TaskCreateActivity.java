@@ -21,7 +21,6 @@ public class TaskCreateActivity extends AppCompatActivity {
     private EditText durationEditText;
     private EditText dateEditText;
     private EditText contextEditText;
-    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class TaskCreateActivity extends AppCompatActivity {
         durationEditText = findViewById(R.id.durationEditText);
         dateEditText = findViewById(R.id.dateEditText);
         contextEditText = findViewById(R.id.contextEditText);
-        saveButton = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton);
 
         // Set the current date as default
         String currentDate = new SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH).format(new Date());

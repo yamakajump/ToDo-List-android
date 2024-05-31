@@ -10,11 +10,11 @@ public class Task implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String title;
-    private String description;
-    private int duration;
-    private String date;
-    private String context;
+    private final String title;
+    private final String description;
+    private final int duration;
+    private final String date;
+    private final String context;
 
     public Task(String title, String description, int duration, String date, String context) {
         this.title = title;

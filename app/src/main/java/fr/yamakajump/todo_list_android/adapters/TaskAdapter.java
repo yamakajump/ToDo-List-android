@@ -14,11 +14,12 @@ import fr.yamakajump.todo_list_android.activities.TaskListActivity;
 import fr.yamakajump.todo_list_android.models.Task;
 import java.util.ArrayList;
 
+/** @noinspection deprecation*/
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
-    private ArrayList<Task> taskList;
-    private Context context;
-    private TaskListActivity taskListActivity; // Référence à l'activité
+    private final ArrayList<Task> taskList;
+    private final Context context;
+    private final TaskListActivity taskListActivity; // Référence à l'activité
 
     public TaskAdapter(ArrayList<Task> taskList, TaskListActivity taskListActivity) {
         this.taskList = taskList;
@@ -41,16 +42,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.dateTextView.setText(task.getDate());
         holder.contextTextView.setText(task.getContext());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int adapterPosition = holder.getAdapterPosition(); // Obtenir la position dynamique
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    Intent intent = new Intent(context, TaskDescActivity.class);
-                    intent.putExtra("task", taskList.get(adapterPosition));
-                    intent.putExtra("taskPosition", adapterPosition);
-                    taskListActivity.startActivityForResult(intent, TaskListActivity.REQUEST_CODE_EDIT_TASK);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition(); // Obtenir la position dynamique
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                Intent intent = new Intent(context, TaskDescActivity.class);
+                intent.putExtra("task", taskList.get(adapterPosition));
+                intent.putExtra("taskPosition", adapterPosition);
+                taskListActivity.startActivityForResult(intent, TaskListActivity.REQUEST_CODE_EDIT_TASK);
             }
         });
     }

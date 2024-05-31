@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         // Démarrer TaskListActivity au démarrage de l'application
         Intent intent = new Intent(this, TaskListActivity.class);
         startActivity(intent);
-        finish(); // Pour éviter que l'utilisateur revienne à cette activité en appuyant sur le bouton retour
+        finish();
     }
 }

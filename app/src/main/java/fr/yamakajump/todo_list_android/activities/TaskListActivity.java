@@ -1,32 +1,34 @@
 package fr.yamakajump.todo_list_android.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.yamakajump.todo_list_android.R;
 import fr.yamakajump.todo_list_android.adapters.TaskAdapter;
 import fr.yamakajump.todo_list_android.models.AppDatabase;
 import fr.yamakajump.todo_list_android.models.Task;
 import fr.yamakajump.todo_list_android.models.TaskDao;
-import java.util.ArrayList;
-import java.util.List;
 
+/** @noinspection deprecation*/
 public class TaskListActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_TASK = 1;
     public static final int REQUEST_CODE_EDIT_TASK = 2;
     public static final int RESULT_CODE_DELETE_TASK = 3;
 
-    private RecyclerView recyclerView;
     private TaskAdapter taskAdapter;
     private ArrayList<Task> taskList;
-    private Button addTaskButton;
     private TaskDao taskDao;
 
     @Override
@@ -36,8 +38,8 @@ public class TaskListActivity extends AppCompatActivity {
 
         taskDao = AppDatabase.getInstance(this).taskDao();
 
-        recyclerView = findViewById(R.id.recyclerView);
-        addTaskButton = findViewById(R.id.addTaskButton);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        Button addTaskButton = findViewById(R.id.addTaskButton);
         taskList = new ArrayList<>();
 
         taskAdapter = new TaskAdapter(taskList, this);
@@ -46,12 +48,9 @@ public class TaskListActivity extends AppCompatActivity {
 
         loadTasks();
 
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TaskListActivity.this, TaskCreateActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_ADD_TASK);
-            }
+        addTaskButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TaskListActivity.this, TaskCreateActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ADD_TASK);
         });
     }
 
@@ -78,68 +77,38 @@ public class TaskListActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void loadTasks() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                List<Task> tasks = taskDao.getAllTasks();
-                taskList.clear();
-                taskList.addAll(tasks);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        taskAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
+        AsyncTask.execute(() -> {
+            List<Task> tasks = taskDao.getAllTasks();
+            taskList.clear();
+            taskList.addAll(tasks);
+            runOnUiThread(() -> taskAdapter.notifyDataSetChanged());
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void saveTask(Task task) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDao.insert(task);
-                taskList.add(task);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        taskAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
+        AsyncTask.execute(() -> {
+            taskDao.insert(task);
+            taskList.add(task);
+            runOnUiThread(() -> taskAdapter.notifyDataSetChanged());
         });
     }
 
     private void updateTask(Task task, int position) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDao.update(task);
-                taskList.set(position, task);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        taskAdapter.notifyItemChanged(position);
-                    }
-                });
-            }
+        AsyncTask.execute(() -> {
+            taskDao.update(task);
+            taskList.set(position, task);
+            runOnUiThread(() -> taskAdapter.notifyItemChanged(position));
         });
     }
 
     private void deleteTask(int position) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDao.delete(taskList.get(position));
-                taskList.remove(position);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        taskAdapter.notifyItemRemoved(position);
-                    }
-                });
-            }
+        AsyncTask.execute(() -> {
+            taskDao.delete(taskList.get(position));
+            taskList.remove(position);
+            runOnUiThread(() -> taskAdapter.notifyItemRemoved(position));
         });
     }
 }
