@@ -36,6 +36,7 @@ public class TaskDescActivity extends AppCompatActivity {
         contextEditText = findViewById(R.id.contextEditText);
         Button saveButton = findViewById(R.id.saveButton);
         Button deleteButton = findViewById(R.id.deleteButton);
+        Button retourButton = findViewById(R.id.retourButton);
 
         Task task = (Task) getIntent().getSerializableExtra("task");
         taskPosition = getIntent().getIntExtra("taskPosition", -1);
@@ -90,5 +91,7 @@ public class TaskDescActivity extends AppCompatActivity {
             setResult(TaskListActivity.RESULT_CODE_DELETE_TASK, resultIntent);
             finish();
         });
+
+        retourButton.setOnClickListener(v -> onBackPressed());
     }
 }

@@ -8,4 +8,5 @@
     <string name="save">Save</string>
     <string name="delete_task">Delete Task</string>
     <string name="add_task">Add Task</string>
+    <string name="retour">Retour</string>
 </resources>
