@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 public class TaskListActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_ADD_TASK = 1;
+    public static final int REQUEST_CODE_ADD_TASK = 1;
+    public static final int REQUEST_CODE_EDIT_TASK = 2; // Nouveau code de requête pour la modification des tâches
 
     private RecyclerView recyclerView;
     private TaskAdapter taskAdapter;
@@ -56,6 +57,13 @@ public class TaskListActivity extends AppCompatActivity {
             Task newTask = (Task) data.getSerializableExtra("task");
             taskList.add(newTask);
             taskAdapter.notifyDataSetChanged();
+        } else if (requestCode == REQUEST_CODE_EDIT_TASK && resultCode == RESULT_OK && data != null) {
+            Task updatedTask = (Task) data.getSerializableExtra("updatedTask");
+            int position = data.getIntExtra("taskPosition", -1);
+            if (position != -1) {
+                taskList.set(position, updatedTask);
+                taskAdapter.notifyItemChanged(position);
+            }
         }
     }
 }

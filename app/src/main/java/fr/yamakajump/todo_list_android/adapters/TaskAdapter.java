@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.yamakajump.todo_list_android.R;
 import fr.yamakajump.todo_list_android.activities.TaskDescActivity;
+import fr.yamakajump.todo_list_android.activities.TaskListActivity;
 import fr.yamakajump.todo_list_android.models.Task;
 import java.util.ArrayList;
 
@@ -17,10 +18,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private ArrayList<Task> taskList;
     private Context context;
+    private TaskListActivity taskListActivity; // Référence à l'activité
 
-    public TaskAdapter(ArrayList<Task> taskList, Context context) {
+    public TaskAdapter(ArrayList<Task> taskList, TaskListActivity taskListActivity) {
         this.taskList = taskList;
-        this.context = context;
+        this.context = taskListActivity;
+        this.taskListActivity = taskListActivity;
     }
 
     @NonNull
@@ -41,9 +44,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, TaskDescActivity.class);
-                intent.putExtra("task", task);
-                context.startActivity(intent);
+                int adapterPosition = holder.getAdapterPosition(); // Obtenir la position dynamique
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    Intent intent = new Intent(context, TaskDescActivity.class);
+                    intent.putExtra("task", taskList.get(adapterPosition));
+                    intent.putExtra("taskPosition", adapterPosition);
+                    taskListActivity.startActivityForResult(intent, TaskListActivity.REQUEST_CODE_EDIT_TASK);
+                }
             }
         });
     }
