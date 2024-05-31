@@ -21,6 +21,7 @@ public class TaskListActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_TASK = 1;
     public static final int REQUEST_CODE_EDIT_TASK = 2;
+    public static final int RESULT_CODE_DELETE_TASK = 3;
 
     private RecyclerView recyclerView;
     private TaskAdapter taskAdapter;
@@ -61,11 +62,18 @@ public class TaskListActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_ADD_TASK && resultCode == RESULT_OK && data != null) {
             Task newTask = (Task) data.getSerializableExtra("task");
             saveTask(newTask);
-        } else if (requestCode == REQUEST_CODE_EDIT_TASK && resultCode == RESULT_OK && data != null) {
-            Task updatedTask = (Task) data.getSerializableExtra("updatedTask");
-            int position = data.getIntExtra("taskPosition", -1);
-            if (position != -1) {
-                updateTask(updatedTask, position);
+        } else if (requestCode == REQUEST_CODE_EDIT_TASK && data != null) {
+            if (resultCode == RESULT_OK) {
+                Task updatedTask = (Task) data.getSerializableExtra("updatedTask");
+                int position = data.getIntExtra("taskPosition", -1);
+                if (position != -1) {
+                    updateTask(updatedTask, position);
+                }
+            } else if (resultCode == RESULT_CODE_DELETE_TASK) {
+                int position = data.getIntExtra("taskPosition", -1);
+                if (position != -1) {
+                    deleteTask(position);
+                }
             }
         }
     }
@@ -113,6 +121,22 @@ public class TaskListActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         taskAdapter.notifyItemChanged(position);
+                    }
+                });
+            }
+        });
+    }
+
+    private void deleteTask(int position) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                taskDao.delete(taskList.get(position));
+                taskList.remove(position);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        taskAdapter.notifyItemRemoved(position);
                     }
                 });
             }

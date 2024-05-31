@@ -6,16 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
 import fr.yamakajump.todo_list_android.R;
 import fr.yamakajump.todo_list_android.activities.TaskDescActivity;
 import fr.yamakajump.todo_list_android.activities.TaskListActivity;
 import fr.yamakajump.todo_list_android.models.Task;
+import java.util.ArrayList;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
@@ -61,12 +58,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public int getItemCount() {
         return taskList.size();
-    }
-
-    public void updateTaskList(ArrayList<Task> newTaskList) {
-        taskList.clear();
-        taskList.addAll(newTaskList);
-        notifyDataSetChanged();
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {

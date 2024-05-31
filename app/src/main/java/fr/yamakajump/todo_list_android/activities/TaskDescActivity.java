@@ -22,6 +22,7 @@ public class TaskDescActivity extends AppCompatActivity {
     private EditText dateEditText;
     private EditText contextEditText;
     private Button saveButton;
+    private Button deleteButton;
     private int taskPosition;
 
     @Override
@@ -35,6 +36,7 @@ public class TaskDescActivity extends AppCompatActivity {
         dateEditText = findViewById(R.id.dateEditText);
         contextEditText = findViewById(R.id.contextEditText);
         saveButton = findViewById(R.id.saveButton);
+        deleteButton = findViewById(R.id.deleteButton); // Initialize the delete button
 
         Task task = (Task) getIntent().getSerializableExtra("task");
         taskPosition = getIntent().getIntExtra("taskPosition", -1);
@@ -81,6 +83,16 @@ public class TaskDescActivity extends AppCompatActivity {
                 resultIntent.putExtra("updatedTask", updatedTask);
                 resultIntent.putExtra("taskPosition", taskPosition);
                 setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() { // Add the delete button click listener
+            @Override
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("taskPosition", taskPosition);
+                setResult(TaskListActivity.RESULT_CODE_DELETE_TASK, resultIntent);
                 finish();
             }
         });
